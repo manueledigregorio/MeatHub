@@ -13,9 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\SelectColumn;
-use Filament\Tables\Columns\ToggleColumn;
-use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 
@@ -30,7 +28,7 @@ class ProductResource extends Resource
         return $form
             ->schema([
 
-                Card::make()
+                Section::make()
                     ->schema([
                         TextInput::make('name')
                             ->label('Nome prodotto')
@@ -43,6 +41,10 @@ class ProductResource extends Resource
                                 'kg' => 'kg',
                                 'pz' => 'pz',
                             ]),
+                        Select::make('category_id')
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->required(),
 
                         TextInput::make('sale_price')
                             ->label('Prezzo di vendita')
@@ -66,7 +68,28 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Nome')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('unit')
+                    ->label('Unità')
+                    ->sortable(),
+                TextColumn::make('category.name')
+                    ->label('Categoria')
+                    ->sortable(),
+                TextColumn::make('sale_price')
+                    ->label('Prezzo di vendita')
+                    ->money('EUR', true)
+                    ->sortable(),
+                TextColumn::make('cost_price')
+                    ->label('Prezzo di acquisto')
+                    ->money('EUR', true)
+                    ->sortable(),
+                TextColumn::make('stock_quantity')
+                    ->label('Quantità')
+                    ->numeric()
+                    ->sortable(),
             ])
             ->filters([
                 //

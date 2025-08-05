@@ -8,6 +8,7 @@ class Order extends Model
 {
     protected $fillable = [
         'total',
+        'created_at'
     ];
 
     public function items()
