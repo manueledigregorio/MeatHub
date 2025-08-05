@@ -17,9 +17,9 @@ return new class extends Migration
             $table->enum('type', ['peso', 'pezzo']);
             $table->string('unit')->default('kg');
             $table->foreignId('category_id')->nullable()->constrained();
-            $table->decimal('sale_price', 8, 2);
-            $table->decimal('cost_price', 8, 2)->nullable();
-            $table->decimal('stock_quantity', 8, 3)->default(0);
+            $table->integer('sale_price');
+            $table->integer('cost_price')->nullable();
+            $table->integer('stock_quantity')->default(0);
             $table->timestamps();
         });
     }

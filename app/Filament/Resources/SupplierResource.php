@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 
 class SupplierResource extends Resource
 {
@@ -23,7 +25,12 @@ class SupplierResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->label('Nome fornitore')
+                    ->required(),
+                TextInput::make('contact')
+                    ->label('Contatto')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +38,13 @@ class SupplierResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Nome')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('contact')
+                    ->label('Contatto')
+                    ->sortable(),
             ])
             ->filters([
                 //

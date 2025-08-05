@@ -12,6 +12,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Section;
 
 class CategoryResource extends Resource
 {
@@ -23,7 +26,12 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make('Nuova categoria')
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Nome')
+                            ->required(),
+                    ])
             ]);
     }
 
@@ -31,7 +39,10 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Nome')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //

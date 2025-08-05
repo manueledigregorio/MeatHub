@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\TextColumn;
 
 class OrderResource extends Resource
 {
@@ -31,7 +32,12 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('total')
+                    ->label('Totale')
+                    ->sortable(),
+                TextColumn::make('created_at')
+                    ->label('Data di creazione')
+                    ->sortable(),
             ])
             ->filters([
                 //

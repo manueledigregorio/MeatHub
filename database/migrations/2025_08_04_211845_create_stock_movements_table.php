@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->enum('type', ['in', 'out']);
-            $table->decimal('quantity', 8, 3);
-            $table->decimal('cost_price', 8, 2)->nullable();
+            $table->integer('quantity');
+            $table->integer('cost_price')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });
