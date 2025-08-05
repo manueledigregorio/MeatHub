@@ -1,61 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MeatHub 🥩 – Butchery & Market Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**MeatHub** is a Laravel-based management system designed for butcher shops and small markets. The platform offers complete control over product inventory (sold by weight or unit), supplier purchases, point-of-sale operations, warehouse movements, and financial analysis (food cost, gross margins, etc.).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎯 Project Objectives
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Simplify the management of sales, inventory, and supplier purchases
+- Provide real-time data on margins, stock levels, and product performance
+- Offer an intuitive and role-based admin interface using Filament
+- Enable operational insights with detailed statistics and reporting
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🧩 Core Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 📦 Product Management
+- Full CRUD for products with optional image and description
+- Categorization by type (e.g., fresh meat, frozen, cured, etc.)
+- Sales by weight or unit
+- Real-time stock levels
+- Automatic average purchase price calculation
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 🏪 Inventory Management
+- Product loading (supplier purchases)
+- Product unloading (sales and adjustments)
+- Historical log of all movements
+- Stock level alerts for critical items
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 💰 Sales System
+- Quick sale entry for counter operations
+- Automatic total calculation and stock deduction
+- Order history with detailed lines, timestamps, and operator tracking
 
-## Laravel Sponsors
+### 📉 Food Cost & Margins
+- Automated food cost and gross margin calculation
+- Configurable margin thresholds with alerts
+- Product and category profitability reports
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 🧾 Supplier Management
+- Supplier directory with contact info and notes
+- Purchase history per product and supplier
 
-### Premium Partners
+### 📊 Statistics & Reports
+- Daily / weekly / monthly sales
+- Best-selling products
+- Low-stock alerts
+- Profitability per product or category
+- Average food cost per category
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 👤 User Roles & Permissions
+- **Admin**: full access
+- **Sales**: POS operations only
+- **Warehouse**: stock operations only
+- Each user sees a custom dashboard tailored to their role
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Tech Stack
 
-## Code of Conduct
+| Component          | Technology                     |
+|--------------------|--------------------------------|
+| Backend            | Laravel                        |
+| Admin Panel        | Filament                       |
+| Database           | MySQL / SQLite (local)         |
+| Media Management   | Spatie Media Library           |
+| Charts & Reports   | Filament Charts, Laravel Excel |
+| Authentication     | Filament Auth / Laravel Breeze |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🔮 Planned Features
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- PDF invoice generation for clients
+- Barcode scanning support
+- Mobile app for stock management
+- Customer-facing frontend for placing orders
+- Integration with eCommerce platforms (Shopify, WooCommerce)
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## ⚙️ Local Development Setup
+
+```bash
+git clone https://github.com/manueledigregorio/MeatHub.git
+cd MeatHub
+
+composer install
+cp .env.example .env
+php artisan key:generate
+
+# Configure your database credentials in .env
+php artisan migrate
+php artisan serve
