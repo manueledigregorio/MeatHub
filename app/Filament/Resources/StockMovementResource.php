@@ -18,6 +18,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Conditional;
 use Filament\Tables\Columns\TextColumn;
+use Closure;
+use Filament\Forms\Get;
+use App\Models\Product;
 
 class StockMovementResource extends Resource
 {
@@ -32,10 +35,9 @@ class StockMovementResource extends Resource
                 Grid::make(2)->schema([
                     Select::make('product_id')
                         ->label('Prodotto')
-                        ->relationship('product', 'name') // Assicurati che esista la relazione
+                        ->relationship('product', 'name')
                         ->searchable()
                         ->required(),
-
                     Select::make('type')
                         ->label('Tipo')
                         ->options([
@@ -43,17 +45,33 @@ class StockMovementResource extends Resource
                             'out' => 'Uscita',
                         ])
                         ->required(),
-
                     TextInput::make('quantity')
                         ->label('Quantità')
                         ->numeric()
-                        ->required(),
+                        ->required()
+                        ->rules([
+                            function (Get $get) {
+                                return function (string $attribute, $value, Closure $fail) use ($get) {
+                                    // Prendi gli altri campi del form
+                                    $productId = $get('product_id');
+                                    $type = $get('type');
+
+                                    // Se è tipo OUT, controlla stock
+                                    if ($type === 'out' && $productId) {
+                                        $stock = Product::where('id', $productId)->value('stock_quantity');
+
+                                        if ($value > $stock) {
+                                            $fail("Stock insufficiente! Disponibili: {$stock}");
+                                        }
+                                    }
+                                };
+                            },
+                        ]),
 
                     TextInput::make('cost_price')
                         ->label('Prezzo di acquisto')
                         ->numeric()
                         ->visible(fn(callable $get) => $get('type') === 'in'),
-
                     Textarea::make('note')
                         ->label('Note')
                         ->columnSpanFull(),
