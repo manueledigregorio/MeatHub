@@ -7,12 +7,14 @@ use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 
 class OrderResource extends Resource
 {
@@ -24,7 +26,9 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('total')
+                    ->label('Totale')
+                    ->required(),
             ]);
     }
 
@@ -55,7 +59,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ItemsRelationManager::class,
         ];
     }
 
