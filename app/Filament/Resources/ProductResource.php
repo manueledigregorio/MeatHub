@@ -33,7 +33,6 @@ class ProductResource extends Resource
                         TextInput::make('name')
                             ->label('Nome prodotto')
                             ->required(),
-
                         Select::make('unit')
                             ->label('Tipo')
                             ->required()
@@ -45,17 +44,17 @@ class ProductResource extends Resource
                             ->relationship('category', 'name')
                             ->searchable()
                             ->required(),
-
                         TextInput::make('sale_price')
                             ->label('Prezzo di vendita')
                             ->numeric(),
-
                         TextInput::make('cost_price')
                             ->label('Prezzo di acquisto')
                             ->numeric(),
-
                         TextInput::make('stock_quantity')
                             ->label('Quantità prodotto')
+                            ->numeric(),
+                        TextInput::make('min_stock_threshold')
+                            ->label('Soglia minima prodotto ')
                             ->numeric(),
                     ])
                     ->columns(3)
@@ -90,6 +89,28 @@ class ProductResource extends Resource
                     ->label('Quantità')
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('min_stock_threshold')
+                    ->label('Soglia minima prodotto')
+                    ->numeric()
+                    ->badge()
+                    ->getStateUsing(function ($record) {
+                        if ($record->stock_quantity <= $record->min_stock_threshold) {
+                            return 'Stock basso';
+                        } elseif ($record->stock_quantity == $record->min_stock_threshold) {
+                            return 'Stock sufficiente';
+                        } elseif ($record->stock_quantity >= $record->min_stock_threshold) {
+                            return 'Stock ottimo';
+                        }
+                    })
+                    ->color(function ($record) {
+                        if ($record->stock_quantity <= $record->min_stock_threshold) {
+                            return 'danger';
+                        } elseif ($record->stock_quantity == $record->min_stock_threshold) {
+                            return 'warning';
+                        } else {
+                            return 'success';
+                        }
+                    }),
             ])
             ->filters([
                 //

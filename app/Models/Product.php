@@ -14,6 +14,7 @@ class Product extends Model
         'sale_price',
         'cost_price',
         'stock_quantity',
+        'min_stock_threshold',
     ];
 
     public function category()
