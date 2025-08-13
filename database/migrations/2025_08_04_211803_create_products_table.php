@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('sale_price');
             $table->integer('cost_price')->nullable();
             $table->integer('stock_quantity')->default(0);
+            $table->integer('min_stock_threshold');
             $table->timestamps();
         });
     }

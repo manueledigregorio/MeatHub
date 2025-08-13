@@ -40,6 +40,7 @@ class StockMovementResource extends Resource
                         ->required(),
                     Select::make('type')
                         ->label('Tipo')
+                        ->reactive()
                         ->options([
                             'in' => 'Entrata',
                             'out' => 'Uscita',
@@ -52,11 +53,10 @@ class StockMovementResource extends Resource
                         ->rules([
                             function (Get $get) {
                                 return function (string $attribute, $value, Closure $fail) use ($get) {
-                                    // Prendi gli altri campi del form
+
                                     $productId = $get('product_id');
                                     $type = $get('type');
 
-                                    // Se è tipo OUT, controlla stock
                                     if ($type === 'out' && $productId) {
                                         $stock = Product::where('id', $productId)->value('stock_quantity');
 
