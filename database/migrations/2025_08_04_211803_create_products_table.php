@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('unit')->default('kg');
             $table->foreignId('category_id')->nullable()->constrained();
             $table->integer('sale_price');
+            $table->integer('tax_rate');
             $table->integer('cost_price')->nullable();
             $table->integer('stock_quantity')->default(0);
             $table->integer('min_stock_threshold');

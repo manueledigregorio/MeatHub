@@ -30,6 +30,7 @@ class CategoryResource extends Resource
                     ->schema([
                         TextInput::make('name')
                             ->label('Nome')
+                            ->placeholder('Es: Carni bovine, Salumi, Formaggi...')
                             ->required(),
                     ])
             ]);

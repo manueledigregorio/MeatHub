@@ -12,6 +12,7 @@ class Product extends Model
         'unit',        // kg / pz
         'category_id', // collegamento alla categoria
         'sale_price',
+        'tax_rate',
         'cost_price',
         'stock_quantity',
         'min_stock_threshold',
@@ -22,18 +23,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function stockMovements()
-    {
-        return $this->hasMany(StockMovement::class);
-    }
-
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
-    }
-
-    public function purchases()
-    {
-        return $this->hasMany(Purchase::class);
     }
 }

@@ -40,6 +40,10 @@ class ProductResource extends Resource
                                 'kg' => 'kg',
                                 'pz' => 'pz',
                             ]),
+                        TextInput::make('tax_rate')
+                            ->label('Aliquota IVA (%)')
+                            ->numeric()
+                            ->required(),
                         Select::make('category_id')
                             ->relationship('category', 'name')
                             ->searchable()
@@ -73,6 +77,9 @@ class ProductResource extends Resource
                     ->sortable(),
                 TextColumn::make('unit')
                     ->label('Unità')
+                    ->sortable(),
+                TextColumn::make('tax_rate')
+                    ->label('IVA (%)')
                     ->sortable(),
                 TextColumn::make('category.name')
                     ->label('Categoria')
@@ -127,10 +134,7 @@ class ProductResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            RelationManagers\PurchaseRelationManager::class,
-            RelationManagers\StockMovementRelationManager::class,
-        ];
+        return [];
     }
 
     public static function getPages(): array

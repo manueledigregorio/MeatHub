@@ -14,6 +14,7 @@ class StockMovement extends Model
         'quantity',
         'cost_price',
         'note',
+        'order_id',
     ];
 
     public static function booted()
@@ -31,5 +32,9 @@ class StockMovement extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }

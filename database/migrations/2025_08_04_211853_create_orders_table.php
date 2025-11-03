@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('total')->default(0);
+            $table->enum('type', ['sale', 'purchase']);
             $table->timestamps();
         });
     }
